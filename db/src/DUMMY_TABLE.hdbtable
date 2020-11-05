@@ -1,0 +1,5 @@
+column table "TEST_PROJECT.db::DUMMY_TABLE"
+(
+	ID INTEGER,
+	NAME NVARCHAR(50)
+)
