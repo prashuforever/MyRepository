@@ -7,6 +7,12 @@
   <DataSource id="TEST_PROJECT.db::DUMMY_TABLE">
     <resourceUri>TEST_PROJECT.db::DUMMY_TABLE</resourceUri>
   </DataSource>
+  <DataSource id="Projection_1_copy$$$$TEST_PROJECT.db::DUMMY_TABLE$$">
+    <resourceUri>TEST_PROJECT.db::DUMMY_TABLE</resourceUri>
+  </DataSource>
+  <DataSource id="Projection_1_copy_copy$$$$TEST_PROJECT.db::DUMMY_TABLE$$">
+    <resourceUri>TEST_PROJECT.db::DUMMY_TABLE</resourceUri>
+  </DataSource>
 </dataSources>
 <calculationViews>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
@@ -16,21 +22,97 @@
     </viewAttributes>
     <calculatedViewAttributes/>
     <restrictedViewAttributes/>
-    <input node="TEST_PROJECT.db::DUMMY_TABLE">
+    <input node="TEST_PROJECT.db::DUMMY_TABLE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1_copy">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input emptyUnionBehavior="undefined" node="Projection_1_copy$$$$TEST_PROJECT.db::DUMMY_TABLE$$"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+    </input>
+    <input node="Projection_1_copy" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+    </input>
+  
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1_copy_copy">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input emptyUnionBehavior="undefined" node="Projection_1_copy_copy$$$$TEST_PROJECT.db::DUMMY_TABLE$$"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+    </input>
+    <joinAttribute name="ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1_copy_copy">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1_copy_copy">
       <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
     </input>
   </calculationView>
 </calculationViews>
-<logicalModel id="Projection_1">
+<logicalModel id="Union_1">
   <attributes>
     <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ID"/>
-      <keyMapping columnObjectName="Projection_1" columnName="ID"/>
+      <keyMapping columnObjectName="Union_1" columnName="ID"/>
     </attribute>
     <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="NAME"/>
-      <keyMapping columnObjectName="Projection_1" columnName="NAME"/>
+      <keyMapping columnObjectName="Union_1" columnName="NAME"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
@@ -41,13 +123,47 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="92" y="112"/>
+      <upperLeftCorner x="371.32541717998384" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="92" y="217"/>
+      <upperLeftCorner x="558.5790509894669" y="391.9999976158142"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1_copy" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91.99999999999994" y="391.9999976158142"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="348.57905098946685" y="236.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1_copy_copy" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="265.64689717942747" y="676.9999952316284"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="348.57905098946685" y="391.9999976158142"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="45" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="238.98023051276076" y="551.9999964237213"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="448.9802305127607" y="551.9999964237213"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>
